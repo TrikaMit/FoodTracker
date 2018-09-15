@@ -1,6 +1,7 @@
 // Initialize Firebase
+require('dotenv').config();
 var config = {
-    apiKey: "AIzaSyDjOZYeHYU1gc7YLAbhuDKaKhQ8--1f1f8",
+    apiKey: process.env.APIKEY,
     authDomain: "food-tracker-90c0e.firebaseapp.com",
     databaseURL: "https://food-tracker-90c0e.firebaseio.com",
     projectId: "food-tracker-90c0e",
@@ -27,6 +28,7 @@ $("#add-meal").on("click", function (event) {
     $("#wineArea").empty();
     $("#pairing-text").empty();
     $("#fallback-Food").empty();
+    $(".img-hide").hide();
     var Food = $("#meal").val().trim();
     var food = Food.toLowerCase();
     $("#meal").val("");
@@ -45,7 +47,7 @@ $("#add-meal").on("click", function (event) {
             url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/guessNutrition?title=" + food,
             method: "GET",
             headers: {
-                "X-Mashape-Key": "mWSYqC5gHvmshnuUYlyxmn2HId5zp1uP4wHjsnKKFlHkkIhAvq",
+                "X-Mashape-Key": process.env.XKEY,
                 "X-Mashape-Host": "spoonacular-recipe-food-nutrition-v1.p.mashape.com"
             }
         }).then(function (response) {
@@ -96,7 +98,7 @@ $("#add-meal").on("click", function (event) {
             url: "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/food/wine/pairing?food=" + food + "&maxPrice=100",
             method: "GET",
             headers: {
-                "X-Mashape-Key": "mWSYqC5gHvmshnuUYlyxmn2HId5zp1uP4wHjsnKKFlHkkIhAvq",
+                "X-Mashape-Key": process.env.XKEY,
                 "X-Mashape-Host": "spoonacular-recipe-food-nutrition-v1.p.mashape.com"
             }
         }).then(function (response) {
@@ -125,7 +127,7 @@ $("#add-meal").on("click", function (event) {
                     url: 'https://lcboapi.com/products?q=' + wineChoice[i],
                     method: 'GET',
                     headers: {
-                        'Authorization': 'Token MDo3ODA1OGJkZS02ODVjLTExZTgtYjkzOC1lZjUyYjNkMDRlMzI6bmE5azVHdVlyN1FSaEc4V2hJOU1aUUFpM3pNNTFYR3RsQXRF'
+                        'Authorization': process.env.LCBOAPI
                     }
                 }).then(function (response) {
                     var randomNumber = Math.floor(Math.random() * (response.result.length - 0 + 1)) + 0;
@@ -170,7 +172,7 @@ $("#add-meal").on("click", function (event) {
     }
     //Food Images API
     $.ajax({
-        url: 'https://pixabay.com/api/?key=' + '9191233-f0142d44da13f3353c64ec9fc' + '&q=' + food + '+food' + '&image_type=photo&safesearch=true',
+        url: 'https://pixabay.com/api/?key=' + process.env.PIXABAY + '&q=' + food + '+food' + '&image_type=photo&safesearch=true',
         method: 'GET',
         // key: '9191233-f0142d44da13f3353c64ec9fc'
     }).then(function (response) {

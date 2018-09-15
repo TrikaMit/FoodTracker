@@ -1,5 +1,4 @@
 // Initialize Firebase
-require('dotenv').config();
 var config = {
     apiKey: "AIzaSyDjOZYeHYU1gc7YLAbhuDKaKhQ8--1f1f8",
     authDomain: "food-tracker-90c0e.firebaseapp.com",
